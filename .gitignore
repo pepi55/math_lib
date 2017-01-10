@@ -27,3 +27,10 @@
 *.exe
 *.out
 *.app
+
+# Build directories
+[Bb]uild/
+
+# Ycm files
+*.py
+*.pyc
