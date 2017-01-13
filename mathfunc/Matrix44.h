@@ -272,10 +272,16 @@ namespace igad
 		}
 
 		/// Creates a rotation matrix around an arbitrary axis
-		inline static Matrix44 CreateRotate(float angle, const Vector3& axis)
+		inline static Matrix44 CreateRotate(float angle, const Vector3& v) //axis
 		{
-			// TODO: add arbitrary axis rotation.
+			//Vector3 v = axis; v.Normalize();
+			float c = std::cos(angle), s = std::sin(angle);
+
 			return Matrix44(
+					((v.x * v.x) * (1 - c)) + c, ((v.y * v.x) * (1 - c)) + (v.z * s), ((v.x * v.z) * (1 - c)) - (v.y * s), 0,
+					((v.x * v.y) * (1 - c)) - (v.z * s), ((v.y * v.y) * (1 - c)) + c, ((v.y * v.z) * (1 - c)) + (v.x * s), 0,
+					((v.x * v.z) * (1 - c)) + (v.y * s), ((v.y * v.z) * (1 - c)) - (v.x * s), ((v.z * v.z) * (1 - c)) + c, 0,
+					0, 0, 0, 1
 					);
 		}
 
@@ -347,9 +353,23 @@ namespace igad
 		/// Creates a look at matrix, usually a view matrix
 		inline static Matrix44 CreateLookAt(const Vector3& eye, const Vector3& center, const Vector3& up)
 		{
-			// TODO: create createLookAt matrix.
-			return Matrix44(
+			Vector3 f = Vector3(); Vector3 s = Vector3(); Vector3 u = Vector3();
+			Vector3 UP = up;
+
+			f = f.Normalize(center - eye);
+			s = f.Cross(UP.Normalize(UP)); s.Normalize();
+			u = s.Cross(f); u.Normalize();
+
+			Matrix44 M = Matrix44(
+					s.x, u.x, -f.x, 0,
+					s.y, u.y, -f.y, 0,
+					s.z, u.z, -f.z, 0,
+					0, 0, 0, 1
 					);
+
+			Matrix44 V = CreateTranslation(-eye.x, -eye.y, -eye.z);
+
+			return M * V;
 		}
 
 		/// Transform just the direction
