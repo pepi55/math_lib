@@ -22,5 +22,5 @@ configure_file (
 
 include_directories (${PROJECT_BINARY_DIR})
 
-add_executable (Totoriool totoriol.cpp)
+add_executable (Totoriool "Test(1).cpp")
 target_link_libraries (Totoriool ${EXTRA_LIBS})
