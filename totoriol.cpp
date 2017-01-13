@@ -70,6 +70,14 @@ int main (int argc, char *argv[])
 	std::cout << "mat determinant: " << mat.Determinant() << std::endl;
 	std::cout << "mat3 determinant: " << mat3.Determinant() << std::endl << "\v";
 
+	std::cout << "mat3 x vec: " << std::endl;
+
+	mat3.Transpose();
+	igad::Vector3 vec(1.0f, 3.0f, 2.0f);
+	igad::Vector3 res = mat3 * vec;
+
+	std::cout << "x: " << res.x << " y: " << res.y << " z: " << res.z << std::endl;
+
 	std::cout << "========================================\v" << std::endl;
 
 	std::cout << "Mat Cofactor:" << std::endl;
