@@ -26,7 +26,13 @@ namespace igad
 		};
 
 		/// Construct a new identity matrix
-		inline Matrix44(void) { }
+		inline Matrix44(void)
+		{
+			m[0][0] = 1; m[0][1] = 0; m[0][2] = 0; m[0][3] = 0;
+			m[1][0] = 0; m[1][1] = 1; m[1][2] = 0; m[1][3] = 0;
+			m[2][0] = 0; m[2][1] = 0; m[2][2] = 1; m[2][3] = 0;
+			m[3][0] = 0; m[3][1] = 0; m[3][2] = 0; m[3][3] = 1;
+		}
 
 		/// Construct a new matrix from explicit values
 		inline Matrix44(
@@ -44,28 +50,28 @@ namespace igad
 		{
 			return Matrix44(
 					// first row
-					(m[0][0] * mat.m[0][0]) + (m[0][1] * mat.m[1][0]) + (m[0][2] * mat.m[2][0]) + (m[0][3] * mat.m[3][0]),
-					(m[0][0] * mat.m[0][1]) + (m[0][1] * mat.m[1][1]) + (m[0][2] * mat.m[2][1]) + (m[0][3] * mat.m[3][1]),
-					(m[0][0] * mat.m[0][2]) + (m[0][1] * mat.m[1][2]) + (m[0][2] * mat.m[2][2]) + (m[0][3] * mat.m[3][2]),
-					(m[0][0] * mat.m[0][3]) + (m[0][1] * mat.m[1][3]) + (m[0][2] * mat.m[2][3]) + (m[0][3] * mat.m[3][3]),
+					(mat.m[0][0] * m[0][0]) + (mat.m[0][1] * m[1][0]) + (mat.m[0][2] * m[2][0]) + (mat.m[0][3] * m[3][0]),
+					(mat.m[0][0] * m[0][1]) + (mat.m[0][1] * m[1][1]) + (mat.m[0][2] * m[2][1]) + (mat.m[0][3] * m[3][1]),
+					(mat.m[0][0] * m[0][2]) + (mat.m[0][1] * m[1][2]) + (mat.m[0][2] * m[2][2]) + (mat.m[0][3] * m[3][2]),
+					(mat.m[0][0] * m[0][3]) + (mat.m[0][1] * m[1][3]) + (mat.m[0][2] * m[2][3]) + (mat.m[0][3] * m[3][3]),
 
 					// second row
-					(m[1][0] * mat.m[0][0]) + (m[1][1] * mat.m[1][0]) + (m[1][2] * mat.m[2][0]) + (m[1][3] * mat.m[3][0]),
-					(m[1][0] * mat.m[0][1]) + (m[1][1] * mat.m[1][1]) + (m[1][2] * mat.m[2][1]) + (m[1][3] * mat.m[3][1]),
-					(m[1][0] * mat.m[0][2]) + (m[1][1] * mat.m[1][2]) + (m[1][2] * mat.m[2][2]) + (m[1][3] * mat.m[3][2]),
-					(m[1][0] * mat.m[0][3]) + (m[1][1] * mat.m[1][3]) + (m[1][2] * mat.m[2][3]) + (m[1][3] * mat.m[3][3]),
+					(mat.m[1][0] * m[0][0]) + (mat.m[1][1] * m[1][0]) + (mat.m[1][2] * m[2][0]) + (mat.m[1][3] * m[3][0]),
+					(mat.m[1][0] * m[0][1]) + (mat.m[1][1] * m[1][1]) + (mat.m[1][2] * m[2][1]) + (mat.m[1][3] * m[3][1]),
+					(mat.m[1][0] * m[0][2]) + (mat.m[1][1] * m[1][2]) + (mat.m[1][2] * m[2][2]) + (mat.m[1][3] * m[3][2]),
+					(mat.m[1][0] * m[0][3]) + (mat.m[1][1] * m[1][3]) + (mat.m[1][2] * m[2][3]) + (mat.m[1][3] * m[3][3]),
 
 					// third row
-					(m[2][0] * mat.m[0][0]) + (m[2][1] * mat.m[1][0]) + (m[2][2] * mat.m[2][0]) + (m[2][3] * mat.m[3][0]),
-					(m[2][0] * mat.m[0][1]) + (m[2][1] * mat.m[1][1]) + (m[2][2] * mat.m[2][1]) + (m[2][3] * mat.m[3][1]),
-					(m[2][0] * mat.m[0][2]) + (m[2][1] * mat.m[1][2]) + (m[2][2] * mat.m[2][2]) + (m[2][3] * mat.m[3][2]),
-					(m[2][0] * mat.m[0][3]) + (m[2][1] * mat.m[1][3]) + (m[2][2] * mat.m[2][3]) + (m[2][3] * mat.m[3][3]),
+					(mat.m[2][0] * m[0][0]) + (mat.m[2][1] * m[1][0]) + (mat.m[2][2] * m[2][0]) + (mat.m[2][3] * m[3][0]),
+					(mat.m[2][0] * m[0][1]) + (mat.m[2][1] * m[1][1]) + (mat.m[2][2] * m[2][1]) + (mat.m[2][3] * m[3][1]),
+					(mat.m[2][0] * m[0][2]) + (mat.m[2][1] * m[1][2]) + (mat.m[2][2] * m[2][2]) + (mat.m[2][3] * m[3][2]),
+					(mat.m[2][0] * m[0][3]) + (mat.m[2][1] * m[1][3]) + (mat.m[2][2] * m[2][3]) + (mat.m[2][3] * m[3][3]),
 
-					// third row
-					(m[3][0] * mat.m[0][0]) + (m[3][1] * mat.m[1][0]) + (m[3][2] * mat.m[2][0]) + (m[3][3] * mat.m[3][0]),
-					(m[3][0] * mat.m[0][1]) + (m[3][1] * mat.m[1][1]) + (m[3][2] * mat.m[2][1]) + (m[3][3] * mat.m[3][1]),
-					(m[3][0] * mat.m[0][2]) + (m[3][1] * mat.m[1][2]) + (m[3][2] * mat.m[2][2]) + (m[3][3] * mat.m[3][2]),
-					(m[3][0] * mat.m[0][3]) + (m[3][1] * mat.m[1][3]) + (m[3][2] * mat.m[2][3]) + (m[3][3] * mat.m[3][3])
+					// third last
+					(mat.m[3][0] * m[0][0]) + (mat.m[3][1] * m[1][0]) + (mat.m[3][2] * m[2][0]) + (mat.m[3][3] * m[3][0]),
+					(mat.m[3][0] * m[0][1]) + (mat.m[3][1] * m[1][1]) + (mat.m[3][2] * m[2][1]) + (mat.m[3][3] * m[3][1]),
+					(mat.m[3][0] * m[0][2]) + (mat.m[3][1] * m[1][2]) + (mat.m[3][2] * m[2][2]) + (mat.m[3][3] * m[3][2]),
+					(mat.m[3][0] * m[0][3]) + (mat.m[3][1] * m[1][3]) + (mat.m[3][2] * m[2][3]) + (mat.m[3][3] * m[3][3])
 					);
 		}
 
@@ -248,10 +254,10 @@ namespace igad
 		inline static Matrix44 CreateTranslation(float x, float y, float z)
 		{
 			return Matrix44(
-					1.0f, 0.0f, 0.0f, x,
-					0.0f, 1.0f, 0.0f, y,
-					0.0f, 0.0f, 1.0f, z,
-					0.0f, 0.0f, 0.0f, 1.0f
+					1.0f, 0.0f, 0.0f, 0.0f,
+					0.0f, 1.0f, 0.0f, 0.0f,
+					0.0f, 0.0f, 1.0f, 0.0f,
+					x, y, z, 1.0f
 					);
 		}
 
@@ -278,8 +284,8 @@ namespace igad
 		{
 			return Matrix44(
 					1.0f, 0.0f, 0.0f, 0.0f,
-					0.0f, std::cos(angle), -std::sin(angle), 0.0f,
-					0.0f, std::sin(angle), std::cos(angle), 0.0f,
+					0.0f, std::cos(angle), std::sin(angle), 0.0f,
+					0.0f, -std::sin(angle), std::cos(angle), 0.0f,
 					0.0f, 0.0f, 0.0f, 1.0f
 					);
 		}
@@ -288,9 +294,9 @@ namespace igad
 		inline static Matrix44 CreateRotateY(float angle)
 		{
 			return Matrix44(
-					std::cos(angle), 0.0f, std::sin(angle), 0.0f,
+					std::cos(angle), 0.0f, -std::sin(angle), 0.0f,
 					0.0f, 1.0f, 0.0f, 0.0f,
-					-std::sin(angle), 0.0f, std::cos(angle), 0.0f,
+					std::sin(angle), 0.0f, std::cos(angle), 0.0f,
 					0.0f, 0.0f, 0.0f, 1.0f
 					);
 		}
@@ -299,8 +305,8 @@ namespace igad
 		inline static Matrix44 CreateRotateZ(float angle)
 		{
 			return Matrix44(
-					std::cos(angle), -std::sin(angle), 0.0f, 0.0f,
-					std::sin(angle), std::cos(angle), 0.0f, 0.0f,
+					std::cos(angle), std::sin(angle), 0.0f, 0.0f,
+					-std::sin(angle), std::cos(angle), 0.0f, 0.0f,
 					0.0f, 0.0f, 1.0f, 0.0f,
 					0.0f, 0.0f, 0.0f, 1.0f
 					);
@@ -310,10 +316,10 @@ namespace igad
 		inline static Matrix44 CreateOrtho(float left, float right, float bottom, float top, float nearZ, float farZ)
 		{
 			return Matrix44(
-					2.0f / (right - left), 0.0f, 0.0f, (right + left) / (right - left),
-					0.0f, 2.0f / (top - bottom), 0.0f, (top + bottom) / (top - bottom),
-					0.0f, 0.0f, -2.0f / (farZ - nearZ), (farZ + nearZ) / (farZ - nearZ),
-					0.0f, 0.0f, 0.0f, 1.0f
+					2.0f / (right - left), 0.0f, 0.0f, 0.0f,
+					0.0f, 2.0f / (top - bottom), 0.0f, 0.0f,
+					0.0f, 0.0f, -2.0f / (farZ - nearZ), 0.0f,
+					-((right + left) / (right - left)), -((top + bottom) / (top - bottom)), -((farZ + nearZ) / (farZ - nearZ)), 1.0f
 					);
 		}
 
@@ -321,10 +327,10 @@ namespace igad
 		inline static Matrix44 CreateFrustum(float left, float right, float bottom, float top, float nearZ, float farZ)
 		{
 			return Matrix44(
-					(2 * nearZ) / (right - left), 0.0f, (right + left) / (right - left), 0.0f,
-					0.0f, (2 * nearZ) / (top - bottom), (top + bottom) / (top - bottom), 0.0f,
-					0.0f, 0.0f, -(farZ + nearZ) / (farZ - nearZ), (-2 * nearZ) / (farZ - nearZ),
-					0.0f, 0.0f, -1.0f, 0.0f
+					(2 * nearZ) / (right - left), 0.0f, 0.0f, 0.0f,
+					0.0f, (2 * nearZ) / (top - bottom), 0.0f, 0.0f,
+					(right + left) / (right - left), (top + bottom) / (top - bottom), -(farZ + nearZ) / (farZ - nearZ), -1.0f,
+					0.0f, 0.0f, -(2 * farZ * nearZ) / (farZ - nearZ), 0.0f
 					);
 		}
 
