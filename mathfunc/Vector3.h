@@ -2,6 +2,7 @@
 
 #include <cmath>
 #include <assert.h>
+#include <iostream>
 
 namespace igad
 {
@@ -39,7 +40,7 @@ namespace igad
 		};
 
 		/// The default constructor creates a zero vector.
-		inline Vector3(void) {}
+		inline Vector3(void) { }
 
 		/// Creates a vector with the given components
 		inline Vector3(float x, float y, float z) { this->x = x; this->y = y; this->z = z; }
@@ -65,7 +66,7 @@ namespace igad
 		/// Returns a copy of this vector scaled the inverse of the value
 		inline Vector3 operator/(const float value) const
 		{
-			assert (value != 0); float div = 1.0f / value; return Vector3(x * div, y * div, y * div);
+			assert (value != 0); return Vector3(x / value, y / value, z / value);
 		}
 
 		/// Returns the negative this vector
@@ -103,7 +104,7 @@ namespace igad
 		/// with the given vector
 		inline Vector3 Cross(const Vector3& v) const
 		{
-			return Vector3((y * v.z) - (z * v.y), (z * v.x) - (x - v.z), (x * v.y) - (y * v.x));
+			return Vector3((y * v.z) - (z * v.y), (z * v.x) - (x * v.z), (x * v.y) - (y * v.x));
 		}
 
 		/// Calculates and returns the dot product of this vector
@@ -128,7 +129,12 @@ namespace igad
 		/// Turns a non-zero vector into a vector of unit length
 		inline void Normalize(void)
 		{
-			this->operator/(Magnitude());
+			Vector3 v = operator/(Magnitude()); x = v.x; y = v.y; z = v.z;
+		}
+
+		inline Vector3 Normalize(Vector3 v)
+		{
+			return v.operator/(v.Magnitude());
 		}
 
 		/// Checks if the two vectors have identical components
