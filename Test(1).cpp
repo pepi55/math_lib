@@ -242,7 +242,7 @@ void Vector3Test()
 	else
 	{
 		cout << "FAILED\n";
-		cout << "X, y , z " << vector12.x << ", " << vector12.y << ", " << vector12.z << endl;
+		cout << "x, y, z: " << vector12.x << ", " << vector12.y << ", " << vector12.z << endl;
 	}
 
 	///Test 13: Dot
@@ -831,7 +831,6 @@ void Matrix44Test()
 		cout << "FAILED\n";
 	}
 
-/*
 	///Test 15: SetOrientation
 	Matrix44 matrix15 = matrix0_2;
 	Vector3 vector15_1 = matrix0_1.v.xAxis;
@@ -882,7 +881,6 @@ void Matrix44Test()
 		//	cout <<
 		//}
 	}
-*/
 
 /*
 	///Test 16: SetEulerAxis
@@ -1291,7 +1289,6 @@ void Matrix44Test()
 	Vector3 vector27_2;
 	Vector3 vector27_3;
 
-
 	vector27_1.x = 3.0f;
 	vector27_1.y = 2.0f;
 	vector27_1.z = 5.0f;
@@ -1303,18 +1300,17 @@ void Matrix44Test()
 	vector27_3.z = 4.0f;
 
 	Matrix44 matrix27 = Matrix44::CreateLookAt(vector27_1, vector27_2, vector27_3);
-	float matrix27_check[] =
-	{
+	Matrix44 matrix27_check = Matrix44(
 		-0.661222875f,  0.298496485f, -0.688247204f, 0.0f,
 		0.191967934f,  0.954210043f,  0.229415730f, 0.0f,
 		0.725212157f, 0.0195735246f, -0.688247204f, 0.0f,
 		-2.02632809f,  -2.90177727f,   5.04714632f, 1.0f
-	};
+	);
 
 	failure = false;
 	for (char i = 0; i < 16; i++)
 	{
-		if (abs(matrix27.f[i] - matrix27_check[i]) > epsilon)
+		if (abs(matrix27.f[i] - matrix27_check.f[i]) > epsilon)
 		{
 			failure = true;
 			break;
@@ -1329,11 +1325,15 @@ void Matrix44Test()
 	{
 		cout << "FAILED\n";
 
-		for (int row = 0; row < 16; row++)
+		for (int row = 0; row < 4; row++)
 		{
-			cout << matrix27_check[row] << ", ";
+			for (int col = 0; col < 4; col++)
+			{
+				cout << matrix27_check.m[row][col] << ", ";
+			}
+			cout << endl;
 		}
-		cout << endl;
+		cout << endl << endl;
 
 		for (int row = 0; row < 4; row++)
 		{
