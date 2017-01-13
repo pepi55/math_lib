@@ -34,3 +34,7 @@
 # Ycm files
 *.py
 *.pyc
+
+# ctags and cscope
+tags
+cscope.out
