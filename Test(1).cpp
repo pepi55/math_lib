@@ -882,7 +882,6 @@ void Matrix44Test()
 		//}
 	}
 
-/*
 	///Test 16: SetEulerAxis
 	Matrix44 matrix16 = matrix0_1;
 	float matrix16_check[] =
@@ -928,7 +927,6 @@ void Matrix44Test()
 		}
 		cout << endl;
 	}
-*/
 
 	///Test 17: CreateIdentity
 	Matrix44 matrix17 = Matrix44::CreateIdentity();
@@ -1346,7 +1344,6 @@ void Matrix44Test()
 		cout << endl;
 	}
 
-/*
 	///Test 28: TransformDirectionVector
 	Vector3 vector28_1;
 	Vector3 vector28_2;
@@ -1364,7 +1361,6 @@ void Matrix44Test()
 	{
 		cout << "FAILED\n";
 	}
-*/
 }
 
 int main()
