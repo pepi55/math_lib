@@ -230,10 +230,20 @@ namespace igad
 		/// @param x X orthogonal basis vector
 		/// @param y Y orthogonal basis vector
 		/// @param z Z orthogonal basis vector
-		void SetOrientation(const Vector3& x, const Vector3& y, const Vector3& z);
+		void SetOrientation(const Vector3& x, const Vector3& y, const Vector3& z)
+		{
+			v.xAxis = x;
+			v.yAxis = y;
+			v.zAxis = z;
+		}
 
 		/// Set orientation using Euler angles. Broken at current!
-		void SetEulerAxis(float yaw, float pitch, float roll);
+		void SetEulerAxis(float yaw, float pitch, float roll)
+		{
+			Matrix44 M = CreateRotateZ(roll) * CreateRotateX(pitch) * CreateRotateY(yaw);
+
+			SetOrientation(M.v.xAxis, M.v.yAxis, M.v.zAxis);
+		}
 
 		/// Creates an identity matrix
 		///
@@ -373,6 +383,13 @@ namespace igad
 		}
 
 		/// Transform just the direction
-		Vector3 TransformDirectionVector(const Vector3& direction);
+		inline Vector3 TransformDirectionVector(const Vector3& direction)
+		{
+			return Vector3(
+					(direction.x * m[0][0]) + (direction.y * m[1][0]) + (direction.z * m[2][0]) + (0 * m[3][0]),
+					(direction.x * m[0][1]) + (direction.y * m[1][1]) + (direction.z * m[2][1]) + (0 * m[3][1]),
+					(direction.x * m[0][2]) + (direction.y * m[1][2]) + (direction.z * m[2][2]) + (0 * m[3][2])
+					);
+		}
 	};
 }
